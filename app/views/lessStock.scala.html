@@ -1,0 +1,27 @@
+@(products: Seq[Product])
+
+@main("All Products whose stock is less") {
+    <h1 align="center">All products of all warehouses</h1>
+    <table align="center">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Quantity Available</th>
+                <th>Warehouse User</th>
+                <th>Warehouse Location</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(product <- products) {
+            <tr>
+                <td>@product.id</td>
+                <td>@product.name</td>
+                <td>@product.quantity</td>
+                <td>@product.user</td>
+                <td>@product.location</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

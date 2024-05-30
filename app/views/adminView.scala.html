@@ -1,0 +1,78 @@
+@(products: Seq[Product])
+
+@main("All Products") {
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="60">
+    </head>
+    <h1 align="center">All products of all warehouses</h1>
+    <table align="center">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Quantity Available</th>
+                <th>Warehouse User</th>
+                <th>Warehouse Location</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(product <- products) {
+            <tr>
+                <td>@product.id</td>
+                <td>@product.name</td>
+                <td>@product.quantity</td>
+                <td>@product.user</td>
+                <td>@product.location</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+    <h3 align="center"><a href="@routes.ProductController.lessStockViewer">Show me the areas where stock is less</a></h3>
+<h2 align="center">Add a new product to a location</h2>
+<form align="center" action="addProduct" method="post">
+    <label for="name">Product ID:</label>
+    <input type="text" id="product_id" name="product_id" required><br><br>
+    <label for="name">Product Name:</label>
+    <input type="text" id="product_name" name="product_name" required><br><br>
+    <label for="name">Quantity:</label>
+    <input type="text" id="quantity" name="quantity" required><br><br>
+    <label for="name">Location:</label>
+    <input type="text" id="location" name="location" required><br><br>
+    <input type="submit" value="Add Product">
+</form>
+
+<h2 align="center">Delete product from a location</h2>
+<form align="center" action="deleteProduct" method="post">
+    <label for="name">Product ID:</label>
+    <input type="text" id="product_id" name="product_id" required><br><br>
+    <label for="name">Location:</label>
+    <input type="text" id="location" name="location" required><br><br>
+    <input type="submit" value="Delete Product">
+</form>
+
+<h2 align="center">Increase product quantity at a location</h2>
+<form align="center" action="updateProduct" method="post">
+    <label for="name">Product ID:</label>
+    <input type="text" id="product_id" name="product_id" required><br><br>
+    <label for="name">User:</label>
+    <input type="text" id="user" name="user" required><br><br>
+    <label for="name">Quantity to increase:</label>
+    <input type="text" id="quantity" name="quantity" required><br><br>
+    <label for="name">Location:</label>
+    <input type="text" id="location" name="location" required><br><br>
+    <input type="submit" value="Update Product">
+</form>
+<br>
+    <form align="center" action="logOut">
+        <input type="submit" value="Logout">
+    </form>
+
+<script>
+        // Prevent going back to the previous page after logout
+        history.pushState(null, null, location.href);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, location.href);
+        });
+</script>

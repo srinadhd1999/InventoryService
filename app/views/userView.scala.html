@@ -1,0 +1,48 @@
+@(products: Seq[Product])
+
+@main("All Products for the User") {
+    <h1 align="center">All products of a user</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="60">
+    </head>
+    <table align="center">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Quantity Available</th>
+                <th>Warehouse User</th>
+                <th>Warehouse Location</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(product <- products) {
+            <tr>
+                <td>@product.id</td>
+                <td>@product.name</td>
+                <td>@product.quantity</td>
+                <td>@product.user</td>
+                <td>@product.location</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+<h2 align="center">Decrease product quantity at our location after exporting</h2>
+    <form align="center" action="reduceQuantity" method="post">
+        <label for="name">Product ID:</label>
+        <input type="text" id="product_id" name="product_id" required><br><br>
+        <label for="name">User:</label>
+        <input type="text" id="user" name="user" required><br><br>
+        <label for="name">Quantity to decrease:</label>
+        <input type="text" id="quantity" name="quantity" required><br><br>
+        <label for="name">Location:</label>
+        <input type="text" id="location" name="location" required><br><br>
+        <input type="submit" value="Update Product">
+    </form>
+<br>
+<form align="center" action="logOut">
+    <input type="submit" value="Logout">
+</form>
