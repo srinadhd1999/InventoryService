@@ -1,78 +1,96 @@
 @(products: Seq[Product])
 
-@main("All Products") {
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="60">
-    </head>
-    <h1 align="center">All products of all warehouses</h1>
-    <table align="center">
-        <thead>
-            <tr>
-                <th>Product Id</th>
-                <th>Product Name</th>
-                <th>Quantity Available</th>
-                <th>Warehouse User</th>
-                <th>Warehouse Location</th>
-            </tr>
-        </thead>
-        <tbody>
-        @for(product <- products) {
-            <tr>
-                <td>@product.id</td>
-                <td>@product.name</td>
-                <td>@product.quantity</td>
-                <td>@product.user</td>
-                <td>@product.location</td>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
-    <h3 align="center"><a href="@routes.ProductController.lessStockViewer">Show me the areas where stock is less</a></h3>
-<h2 align="center">Add a new product to a location</h2>
-<form align="center" action="addProduct" method="post">
-    <label for="name">Product ID:</label>
-    <input type="text" id="product_id" name="product_id" required><br><br>
-    <label for="name">Product Name:</label>
-    <input type="text" id="product_name" name="product_name" required><br><br>
-    <label for="name">Quantity:</label>
-    <input type="text" id="quantity" name="quantity" required><br><br>
-    <label for="name">Location:</label>
-    <input type="text" id="location" name="location" required><br><br>
-    <input type="submit" value="Add Product">
-</form>
+    @main("All Products") {
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="refresh" content="60">
+                <!-- Bootstrap CSS -->
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        </head>
+        <div class="container">
+            <h4 class="text-center my-4">Products available at all warehouses</h4>
+            <table class="table table-striped table-bordered text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Quantity Available</th>
+                        <th>Warehouse User</th>
+                        <th>Warehouse Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @for(product <- products) {
+                    <tr>
+                        <td>@product.id</td>
+                        <td>@product.name</td>
+                        <td>@product.quantity</td>
+                        <td>@product.user</td>
+                        <td>@product.location</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
 
-<h2 align="center">Delete product from a location</h2>
-<form align="center" action="deleteProduct" method="post">
-    <label for="name">Product ID:</label>
-    <input type="text" id="product_id" name="product_id" required><br><br>
-    <label for="name">Location:</label>
-    <input type="text" id="location" name="location" required><br><br>
-    <input type="submit" value="Delete Product">
-</form>
+            <h4 class="text-center my-4"><a href="@routes.ProductController.lessStockViewer">Show me the areas where stock is less</a></h4>
 
-<h2 align="center">Increase product quantity at a location</h2>
-<form align="center" action="updateProduct" method="post">
-    <label for="name">Product ID:</label>
-    <input type="text" id="product_id" name="product_id" required><br><br>
-    <label for="name">User:</label>
-    <input type="text" id="user" name="user" required><br><br>
-    <label for="name">Quantity to increase:</label>
-    <input type="text" id="quantity" name="quantity" required><br><br>
-    <label for="name">Location:</label>
-    <input type="text" id="location" name="location" required><br><br>
-    <input type="submit" value="Update Product">
-</form>
-<br>
-    <form align="center" action="logOut">
-        <input type="submit" value="Logout">
-    </form>
+            <h4 class="text-center my-4">Add a new product to a location</h4>
+            <form class="text-center" action="addProduct" method="post">
+                <div class="form-group">
+                    <label for="product_id">Product ID:</label>
+                    <input type="text" class="form-control" id="product_id" name="product_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="product_name">Product Name:</label>
+                    <input type="text" class="form-control" id="product_name" name="product_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
 
-<script>
-        // Prevent going back to the previous page after logout
-        history.pushState(null, null, location.href);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, location.href);
-        });
-</script>
+            <h4 class="text-center my-4">Delete product from a location</h4>
+            <form class="text-center" action="deleteProduct" method="post">
+                <div class="form-group">
+                    <label for="product_id">Product ID:</label>
+                    <input type="text" class="form-control" id="product_id" name="product_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" required>
+                </div>
+                <button type="submit" class="btn btn-danger">Delete Product</button>
+            </form>
+
+            <h4 class="text-center my-4">Increase product quantity at a location</h4>
+            <form class="text-center" action="updateProduct" method="post">
+                <div class="form-group">
+                    <label for="product_id">Product ID:</label>
+                    <input type="text" class="form-control" id="product_id" name="product_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="user">User:</label>
+                    <input type="text" class="form-control" id="user" name="user" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity to increase:</label>
+                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" required>
+                </div>
+                <button type="submit" class="btn btn-success">Update Product</button>
+            </form>
+
+            <form class="text-center" action="logOut">
+                <button type="submit" class="btn btn-secondary mt-4">Logout</button>
+            </form>
+        </div>
+    }

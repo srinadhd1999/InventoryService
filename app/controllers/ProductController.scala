@@ -5,7 +5,6 @@ import models.{Product, ProductRepository, UserRepository}
 import play.api.libs.json._
 import play.api.mvc._
 import services.KafkaMessageProducer
-
 import java.sql.Timestamp
 import java.time.LocalDateTime
 import java.util.UUID
